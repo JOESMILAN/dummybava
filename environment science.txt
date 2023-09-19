@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style6.css">
+  <title>Registration Form</title>
+</head>
+<body>
+  
+  <div class="registration-form">
+    <h2>REGISTRATION FROM</h2>
+    <form name="regform" id="registrationForm" onsubmit="return validateForm()">
+      <label for="fname">First Name:</label>
+      <input type="text" id="fname" name="fname" required>
+
+      <label for="lname">Last Name:</label>
+      <input type="text" id="lname" name="lname" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="Confirm_password">Confirm Password:</label>
+      <input type="password" id="Confirm_password" name="Confirm_password" required>
+      
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      var firstName = document.getElementById("fname").value;
+      var lastName = document.getElementById("lname").value;
+      var email = document.getElementById("email").value;
+      var password = document.getElementById
+      var confirmPassword = document.getElementById("Confirm_password").value;
+
+if (firstName === "" || lastName === "" || email === "" || password === "123456" || confirmPassword === "123456") {
+  alert("Registration Successfull");
+  return false;
+}
+
+if (password !== confirmPassword) {
+  alert("Passwords do not match");
+  return false;
+}
+
+return true;
+}
+</script>
+</body>
+</html>
+
+
+
+
+

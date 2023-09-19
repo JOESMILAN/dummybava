@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <?xml-model href="bag2.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+ <products >
+    <product>
+      <id>Anime</id>
+      <name>OnePiece</name>
+      <price>107000</price>
+      <quantity>50</quantity>
+      <category>Hoodie</category>
+    </product>
+    <product>
+      <id>Anime</id>
+      <name>Naruto</name>
+      <price>500000</price>
+      <quantity>150</quantity>
+      <category>Shirt</category>
+    </product>
+    <product>
+      <id>Anime</id>
+      <name>Haikyuu</name>
+      <price>150000</price>
+      <quantity>25</quantity>
+      <category>T-Shirt</category>
+    </product>
+  </products>
+ ---------------------------------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="priceType">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="64000"/>
+      <xs:maxInclusive value="500000"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="categoryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="T-Shirt"/>
+      <xs:enumeration value="Hoodie"/>
+      <xs:enumeration value="Shirt"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="products">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" type="xs:string"/>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element name="price" type="priceType"/>
+              <xs:element name="quantity" type="xs:integer"/>
+              <xs:element name="category" type="categoryType"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+-----------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT products (product+)>
+<!ELEMENT product (id, name, price, quantity, category)>
+<!ATTLIST id pid ID #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ELEMENT quantity (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+--------------------------------
+import xmlschema
+xml_file = "bag1.xml"
+xsd_file = "bag2.xsd"
+
+validator = xmlschema.XMLSchema(xsd_file)
+if validator.is_valid(xml_file):
+    print("XML file is valid against the XSD schema.")
+else:
+    print("XML file is not valid against the XSD schema.")
+    print(validator.validate(xml_file))
+
+----------------------------------------
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+			<title>XML To HTML using codebeautify.org</title>
+		</head>
+		<body>
+			<table border=1>
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>name</th>
+						<th>price</th>
+						<th>quantity</th>
+						<th>category</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Anime</td>
+						<td>OnePiece</td>
+						<td>107000</td>
+						<td>50</td>
+						<td>Hoodie</td>
+					</tr>
+					<tr>
+						<td>Anime</td>
+						<td>Naruto</td>
+						<td>500000</td>
+						<td>150</td>
+						<td>Shirt</td>
+					</tr>
+					<tr>
+						<td>Anime</td>
+						<td>Haikyuu</td>
+						<td>150000</td>
+						<td>25</td>
+						<td>T-Shirt</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>&nbsp</td>
+						<td>&nbsp</td>
+						<td>&nbsp</td>
+						<td>&nbsp</td>
+					</tr>
+				</tbody>
+			</table>
+		</body>
+	</html>
